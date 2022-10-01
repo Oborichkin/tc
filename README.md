@@ -1,1 +1,1 @@
-# Python project template
+# JetBrains TeamCity CLI

@@ -1,4 +1,4 @@
-PROJECT_NAME = template
+PROJECT_NAME = tc
 
 .PHONY = test build push clean hooks
 

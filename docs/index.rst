@@ -1,2 +1,2 @@
-Python Template
-===============
+TeamCity Python API
+===================
