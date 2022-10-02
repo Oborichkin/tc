@@ -1,5 +1,5 @@
 def test_server_info(client):
-    info = client.server
+    info = client.server()
     assert info
     assert info.version
     assert info.build_number
