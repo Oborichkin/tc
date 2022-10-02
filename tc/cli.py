@@ -1,52 +1,20 @@
 import os
-import typer
 import json
-import click
 from typing import List
-from dotenv import load_dotenv
-from .client import Client
 
+import click
+import typer
+from dotenv import load_dotenv
 load_dotenv()
+
+from .client import Client
+from .schema import Project
+from .comp import make_builds_completion, make_projects_completion, make_generic_completer
 
 
 # TODO Read URL and authorization from config first, then environment variables, then command line args
 client = Client(os.environ["TEAMCITY_URL"], os.environ["TEAMCITY_TOKEN"])
 app = typer.Typer()
-
-COMPLETION_MAP = {
-    "projects": ["parent", "build_types", "template", "parameter", "vcs", "feature", "projects"],
-    "vcs_roots": ["project", "properties", "vcs_root_instances"],
-    "build": [],
-    "build_types": ["builds"],
-}
-
-
-def make_project_completion(parent=None):
-    def project_completion():
-        if parent:
-            return [(proj.id, proj.description) for proj in client.project(parent).projects]
-        return [(proj.id, proj.description) for proj in client.projects()]
-
-    return project_completion
-
-
-f = open("debug", "a")
-
-
-def generic_completer(ctx: typer.Context, incomplete: str):
-    cmd = [ctx.command.name, ctx.params["name"], *ctx.params["cmd"]]
-    f.write(json.dumps(cmd) + "\n")
-    if cmd[-2] in COMPLETION_MAP:
-        return COMPLETION_MAP[cmd[-2]]
-    elif cmd[-1] in COMPLETION_MAP:
-        obj = getattr(client, cmd[-3])
-        f.write(str(obj) + "\n")
-        obj = obj(ctx.params["name"])
-        f.write(str(obj) + "\n")
-        obj = getattr(obj, cmd[-1])
-        f.write(str(obj) + "\n")
-        return [o.id for o in obj]
-    return ["SHOULD_NOT_BE_HERE"]
 
 
 @app.command()
@@ -57,10 +25,11 @@ def server():
 
 @app.command()
 def projects(
-    name: str = typer.Argument("_Root", autocompletion=make_project_completion()),
-    cmd: List[str] = typer.Argument(None, autocompletion=generic_completer),
+    name: str = typer.Argument("_Root", autocompletion=make_projects_completion(client)),
+    cmd: List[str] = typer.Argument(None, autocompletion=make_generic_completer(client)),
 ):
-    pass
+    typer.echo(name)
+    typer.echo(cmd)
 
 
 @app.command()
@@ -69,8 +38,12 @@ def vsc(name: str):
 
 
 @app.command()
-def build(name: str):
-    pass
+def builds(
+    name: str = typer.Argument(None, autocompletion=make_builds_completion(client)),
+    cmd: List[str] = typer.Argument(None, autocompletion=make_generic_completer(client))
+):
+    typer.echo(name)
+    typer.echo(cmd)
 
 
 @app.command()

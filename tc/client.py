@@ -1,7 +1,7 @@
 from typing import List
 
 from .api import api
-from .schema import Server, ProjectSummary, Project, BuildSummary, VscRootSummary, VscRoot, Build
+from .schema import Server, ProjectSummary, Project, BuildSummary, VscRootSummary, VscRoot, Build, BuildType
 
 
 class Client:
@@ -21,6 +21,11 @@ class Client:
         if id:
             return Build(**self.api.get(f"/app/rest/builds/id:{id}"))
         return [BuildSummary(**data) for data in self.api.get("/app/rest/builds")["build"]]
+
+    def build_types(self, id=None) -> List[BuildType]:
+        if id:
+            return BuildType(**self.api.get(f"/app/rest/buildTypes/id:{id}"))
+        return [BuildType(**data) for data in self.api.get("/app/rest/buildTypes")["buildType"]]
 
     def vsc_roots(self, id=None) -> List[VscRootSummary]:
         if id:

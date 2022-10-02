@@ -4,16 +4,8 @@ from typing import Optional, List, Any
 from datetime import datetime
 from pydantic import BaseModel, validator, PrivateAttr
 
-# if TYPE_CHECKING:
 from .api import API, api
-
-
-def to_camel(text: str) -> str:
-    s = text.replace("-", " ").replace("_", " ")
-    s = s.split()
-    if len(text) == 0:
-        return text
-    return s[0] + "".join(i.capitalize() for i in s[1:])
+from .utils import to_camel
 
 
 class _Base(BaseModel):
@@ -29,9 +21,31 @@ class _Base(BaseModel):
         alias_generator = to_camel
 
 
+class Link(_Base):
+    pass
+
+
 class Property(_Base):
     name: str
     value: Any
+
+
+class AgentSummary(_Base):
+    id: int
+    name: str
+    type_id: int
+
+
+class Agent(AgentSummary):
+    connected: bool
+    enabled: bool
+    authorized: bool
+    uptodate: bool
+    ip: str
+    # enabled_info
+    # authorized_info
+    properties: List[Property]
+    # pool
 
 
 class Server(_Base):
@@ -49,14 +63,6 @@ class Server(_Base):
         return pendulum.parse(value)
 
 
-class BuildType(_Base):
-    id: str
-    name: str
-    description: Optional[str]
-    project_name: str
-    project_id: str
-
-
 class BuildSummary(_Base):
     id: str
     build_type_id: str
@@ -65,6 +71,29 @@ class BuildSummary(_Base):
     state: str
     branch_name: Optional[str]
     default_branch: Optional[str]
+
+    def __str__(cls):
+        return f"#{cls.number} ({cls.status}) [{cls.state}]"
+
+
+class BuildsLink(Link):
+    def visit(cls) -> List[BuildSummary]:
+        return [BuildSummary(**data) for data in cls._api.get(cls.href)["build"]]
+
+
+class BuildType(_Base):
+    id: str
+    name: str
+    description: Optional[str]
+    project_name: str
+    project_id: str
+    builds: Optional[BuildsLink]
+
+    def __str__(cls):
+        return f"{cls.name}: {cls.description}"
+
+class BuildQueue(_Base):
+    pass
 
 
 class Change(_Base):
@@ -87,7 +116,7 @@ class VcsRootInstance(_Base):
 class Revision(_Base):
     version: str
     vcs_branch_name: str
-    vsc_root_instance: VcsRootInstance
+    vsc_root_instance: Optional[VcsRootInstance]
 
 
 class Agent(_Base):
@@ -103,23 +132,53 @@ class Dependency(_Base):
     state: str
 
 
+class File(_Base):
+    name: str
+    size: int
+    modification_time: datetime
+
+    @validator("modification_time", pre=True)
+    def iso_date(cls, value):
+        return pendulum.parse(value)
+
+
+class ArtifactLink(Link):
+    def visit(cls) -> List[File]:
+        return [File(**data) for data in cls._api.get(cls.href)["file"]] 
+
+
 class Build(BuildSummary):
     status_text: str
     build_type: BuildType
     queued_date: datetime
     start_date: datetime
     finish_date: datetime
-    last_changes: List[Change]
-    revisions: List[Revision]
-    versioned_settings_revision: Revision
+    last_changes: Optional[List[Change]]
+    revisions: Optional[List[Revision]]
+    versioned_settings_revision: Optional[Revision]
     agent: Agent
     # test_occurances
-    # artifacts
+    artifacts: ArtifactLink
     # relatedIssues
     properties: List[Property]
     # statistics
-    snapshot_dependencies: List[Dependency]
-    artifact_dependencies: List[Dependency]
+    snapshot_dependencies: Optional[List[Dependency]]
+    artifact_dependencies: Optional[List[Dependency]]
+
+    def __str__(cls):
+        return f"{cls.build_type} [{cls.status_text}]"
+
+    @validator("last_changes", pre=True)
+    def property_list(cls, value):
+        return value.get("lastChanges", [])
+
+    @validator("revisions", pre=True)
+    def revisions_list(cls, value):
+        return value.get("revisions", [])
+
+    @validator("properties", pre=True)
+    def properties_list(cls, value):
+        return value.get("properties", [])
 
     @validator("queued_date", "start_date", "finish_date", pre=True)
     def iso_date(cls, value):
@@ -143,10 +202,12 @@ class ProjectSummary(_Base):
 
 class Project(ProjectSummary):
     parent_project: Optional[ProjectSummary]
-    build_types: List[BuildType]
+    build_types: Optional[List[BuildType]]
     templates: Optional[List[Template]]
     parameters: Optional[List[Property]]
     projects: List[ProjectSummary]
+    # vsc_roots
+    # project_features
 
     @validator("build_types", "templates", pre=True)
     def build_type_list(cls, value):
@@ -167,5 +228,58 @@ class VscRootSummary(_Base):
 
 
 class VscRoot(VscRootSummary):
+    vsc_name: str
+    modification_check_interval = int
     project: ProjectSummary
     properties: List[Property]
+    # vcs_root_instances
+
+
+class GroupSummary(_Base):
+    key: str
+    name: str
+    description: Optional[str]
+
+
+class UserSummary(_Base):
+    username: str
+    name: str
+    id: int
+
+
+class Group(GroupSummary):
+    parent_groups: List[GroupSummary]
+    child_groups: List[GroupSummary]
+    users: List[UserSummary]
+    properties: List[Property]
+    # roles
+
+
+class User(UserSummary):
+    email: str
+    last_login: datetime
+    properties: List[Property]
+    # roles
+    # groups
+
+    @validator("last_login", pre=True)
+    def iso_date(cls, value):
+        return pendulum.parse(value)
+
+
+class AgentPoolSummary(_Base):
+    id: int
+    name: str
+
+
+class AgentPool(AgentPoolSummary):
+    projects: List[ProjectSummary]
+    agents: List[AgentSummary]
+
+    @validator("projects", pre=True)
+    def property_list(cls, value):
+        return value.get("project", [])
+
+    @validator("agents", pre=True)
+    def project_list(cls, value):
+        return value.get("agent", [])
