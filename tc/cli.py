@@ -9,6 +9,7 @@ from .client import Client
 load_dotenv()
 
 
+# TODO Read URL and authorization from config first, then environment variables, then command line args
 client = Client(os.environ["TEAMCITY_URL"], os.environ["TEAMCITY_TOKEN"])
 app = typer.Typer()
 
