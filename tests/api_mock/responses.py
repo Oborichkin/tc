@@ -161,6 +161,132 @@ project = {
     }
 }
 
+vcs_roots = {
+    "count": 10,
+    "href": "/app/rest/vcs-roots?locator=count:10",
+    "nextHref": "/app/rest/vcs-roots?locator=count:10,start:10",
+    "vcs-root": [
+        {
+            "id": "Abc",
+            "name": "ABC",
+            "href": "/app/rest/vcs-roots/id:Abc"
+        },
+        {
+            "id": "Abc1_2",
+            "name": "ABC (1)",
+            "href": "/app/rest/vcs-roots/id:Abc1_2"
+        },
+        {
+            "id": "Abc2",
+            "name": "ABC (2)",
+            "href": "/app/rest/vcs-roots/id:Abc2"
+        },
+        {
+            "id": "AbcCi",
+            "name": "ABC CI",
+            "href": "/app/rest/vcs-roots/id:AbcCi"
+        },
+        {
+            "id": "Abc_Packages_AbcPackages",
+            "name": "ABC packages",
+            "href": "/app/rest/vcs-roots/id:Abc_Packages_AbcPackages"
+        },
+        {
+            "id": "Abc_Packages_AbcPackages1",
+            "name": "ABC packages (1)",
+            "href": "/app/rest/vcs-roots/id:Abc_Packages_AbcPackages1"
+        },
+        {
+            "id": "Abc_Packages_AbcPackages2",
+            "name": "ABC packages (2)",
+            "href": "/app/rest/vcs-roots/id:Abc_Packages_AbcPackages2"
+        },
+        {
+            "id": "Abc1",
+            "name": "ABC release",
+            "href": "/app/rest/vcs-roots/id:Abc1"
+        },
+        {
+            "id": "Abc_Tests_AbcTestMaster",
+            "name": "ABC Test Master",
+            "href": "/app/rest/vcs-roots/id:Abc_Tests_AbcTestMaster"
+        },
+        {
+            "id": "Abc_Tests_AbcTestDefault",
+            "name": "ABC Test Default",
+            "href": "/app/rest/vcs-roots/id:Abc_Tests_AbcTestDefault"
+        }
+    ]
+}
+
+vcs_root = {
+    "id": "Abc_Abc",
+    "name": "ABC",
+    "vcsName": "jetbrains.git",
+    "modificationCheckInterval": 60,
+    "href": "/app/rest/vcs-roots/id:Abc_Abc",
+    "project": {
+        "id": "Abc",
+        "name": "ABC",
+        "parentProjectId": "_Root",
+        "description": "This is  ABC",
+        "href": "/app/rest/projects/id:Abc",
+        "webUrl": "https://teamcity.com/project.html?projectId=Abc"
+    },
+    "properties": {
+        "count": 11,
+        "property": [
+            {
+                "name": "agentCleanFilesPolicy",
+                "value": "ALL_UNTRACKED"
+            },
+            {
+                "name": "agentCleanPolicy",
+                "value": "ON_BRANCH_CHANGE"
+            },
+            {
+                "name": "authMethod",
+                "value": "TEAMCITY_SSH_KEY"
+            },
+            {
+                "name": "branch",
+                "value": "master"
+            },
+            {
+                "name": "ignoreKnownHosts",
+                "value": "true"
+            },
+            {
+                "name": "submoduleCheckout",
+                "value": "CHECKOUT"
+            },
+            {
+                "name": "teamcity:branchSpec",
+                "value": "+:refs/heads/*"
+            },
+            {
+                "name": "teamcitySshKey",
+                "value": "GitLab Public Deploy Key"
+            },
+            {
+                "name": "url",
+                "value": "git@github.com:ABC/ABC.git"
+            },
+            {
+                "name": "useAlternates",
+                "value": "true"
+            },
+            {
+                "name": "usernameStyle",
+                "value": "USERID"
+            }
+        ]
+    },
+    "vcsRootInstances": {
+        "href": "/app/rest/vcs-root-instances?locator=vcsRoot:(id:Abc_Abc)"
+    }
+}
+
 builds = {
     "count": 10,
     "href": "/app/rest/buildTypes/id:Abc_Master/builds/?locator=start:0,count:10",
@@ -275,6 +401,19 @@ builds = {
             "defaultBranch": True,
             "href": "/app/rest/builds/id:1311678",
             "webUrl": "https://teamcity.com/viewLog.html?buildId=1311678&buildTypeId=Abc_Master"
+        }
+    ]
+}
+
+vcs_root_instances = {
+    "count": 1,
+    "href": "/app/rest/vcs-root-instances?locator=vcsRoot:(id:Abc_Abc)",
+    "vcs-root-instance": [
+        {
+            "id": "2476",
+            "vcs-root-id": "Abc_Abc",
+            "name": "ABC",
+            "href": "/app/rest/vcs-root-instances/id:2476"
         }
     ]
 }

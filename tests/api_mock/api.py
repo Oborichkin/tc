@@ -16,3 +16,9 @@ class ApiMock:
             return project
         elif url == "/app/rest/builds":
             return builds
+        elif url == "/app/rest/vcs-roots":
+            return vcs_roots
+        elif url.startswith("/app/rest/vcs-roots/id:"):
+            return vcs_root
+        elif url.startswith("/app/rest/vcs-root-instances/id:"):
+            return vcs_root_instances

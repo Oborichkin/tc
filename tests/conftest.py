@@ -9,7 +9,7 @@ from .api_mock import ApiMock
 
 
 @pytest.fixture
-def client(monkeypatch):
+def client(monkeypatch) -> Client:
     client = Client("https://teamcity.com", "SUPA_SECRET_TOKEN")
     monkeypatch.setattr(client, "api", ApiMock())
     yield client

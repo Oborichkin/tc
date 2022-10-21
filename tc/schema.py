@@ -50,7 +50,7 @@ class Agent(AgentSummary):
 
 class Server(_Base):
     version: str
-    build_number: int
+    build_number: str
     version_major: int
     version_minor: int
     start_time: datetime
@@ -112,11 +112,15 @@ class VcsRootInstance(_Base):
     vcs_root_id: str
     name: str
 
+class VcsRootInstancesLink(Link):
+    def visit(cls) -> List[VcsRootInstance]:
+        return [VcsRootInstance(**data) for data in cls._api.get(cls.href)["vcs-root-instances"]]
+
 
 class Revision(_Base):
     version: str
     vcs_branch_name: str
-    vsc_root_instance: Optional[VcsRootInstance]
+    vcs_root_instance: Optional[VcsRootInstance]
 
 
 class Agent(_Base):
@@ -144,7 +148,7 @@ class File(_Base):
 
 class ArtifactLink(Link):
     def visit(cls) -> List[File]:
-        return [File(**data) for data in cls._api.get(cls.href)["file"]] 
+        return [File(**data) for data in cls._api.get(cls.href)["file"]]
 
 
 class Build(BuildSummary):
@@ -210,29 +214,33 @@ class Project(ProjectSummary):
     # project_features
 
     @validator("build_types", "templates", pre=True)
-    def build_type_list(cls, value):
+    def _build_type_list(cls, value):
         return value.get("buildType", [])
 
     @validator("parameters", pre=True)
-    def property_list(cls, value):
+    def _property_list(cls, value):
         return value.get("property", [])
 
     @validator("projects", pre=True)
-    def project_list(cls, value):
+    def _project_list(cls, value):
         return value.get("project", [])
 
 
-class VscRootSummary(_Base):
+class VcsRootSummary(_Base):
     id: str
     name: str
 
 
-class VscRoot(VscRootSummary):
-    vsc_name: str
+class VcsRoot(VcsRootSummary):
+    vcs_name: str
     modification_check_interval = int
     project: ProjectSummary
     properties: List[Property]
-    # vcs_root_instances
+    vcs_root_instances: VcsRootInstancesLink
+
+    @validator("properties", pre=True)
+    def properties_list(cls, value):
+        return value.get("property", [])
 
 
 class GroupSummary(_Base):
