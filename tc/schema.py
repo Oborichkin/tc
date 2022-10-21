@@ -92,6 +92,7 @@ class BuildType(_Base):
     def __str__(cls):
         return f"{cls.name}: {cls.description}"
 
+
 class BuildQueue(_Base):
     pass
 
@@ -111,6 +112,7 @@ class VcsRootInstance(_Base):
     id: str
     vcs_root_id: str
     name: str
+
 
 class VcsRootInstancesLink(Link):
     def visit(cls) -> List[VcsRootInstance]:

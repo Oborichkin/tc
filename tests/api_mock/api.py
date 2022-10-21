@@ -5,7 +5,6 @@ from .responses import *
 
 
 class ApiMock:
-
     @staticmethod
     def get(url, *args, **kwargs):
         if url == "/app/rest/server":

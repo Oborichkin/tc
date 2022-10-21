@@ -1,5 +1,6 @@
 from .api_mock.responses import project
 
+
 def test_projects(client):
     projects = client.projects()
     assert projects

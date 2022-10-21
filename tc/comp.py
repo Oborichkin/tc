@@ -10,7 +10,7 @@ COMPLETION_MAP = {
     "vcs_roots": ["project", "properties", "vcs_root_instances"],
     "builds": ["last_changes", "snapshot_dependencies", "artifact-dependencies", "artifacts"],
     "build_types": ["builds"],
-    "artifacts": [""]
+    "artifacts": [""],
 }
 
 
@@ -19,13 +19,16 @@ def make_projects_completion(client: Client, parent=None):
         if parent:
             return [(proj.id, proj.description) for proj in client.projects(parent).projects]
         return [(proj.id, proj.description) for proj in client.projects()]
+
     return project_completion
 
 
 def make_builds_completion(client: Client):
     def builds_completion():
         return [build.id for build in client.builds()]
+
     return builds_completion
+
 
 f = open("debug", "a")
 

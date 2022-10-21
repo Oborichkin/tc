@@ -5,6 +5,7 @@ from typing import List
 import click
 import typer
 from dotenv import load_dotenv
+
 load_dotenv()
 
 from .client import Client
@@ -40,7 +41,7 @@ def vsc(name: str):
 @app.command()
 def builds(
     name: str = typer.Argument(None, autocompletion=make_builds_completion(client)),
-    cmd: List[str] = typer.Argument(None, autocompletion=make_generic_completer(client))
+    cmd: List[str] = typer.Argument(None, autocompletion=make_generic_completer(client)),
 ):
     typer.echo(name)
     typer.echo(cmd)
