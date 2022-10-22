@@ -330,6 +330,33 @@ builds = {
     ],
 }
 
+vcs_root_instance = {
+    "id": "597",
+    "vcs-root-id": "some_vcs_root_id",
+    "name": "ASDF",
+    "vcsName": "svn",
+    "modificationCheckInterval": 1800,
+    "lastVersion": "97710",
+    "href": "/app/rest/vcs-root-instances/id:597",
+    "vcs-root": {"id": "some_vcs_root_id", "name": "ASDF", "href": "/app/rest/vcs-roots/id:some_vcs_root_id"},
+    "status": {"current": {"status": "finished", "requestorType": "schedule", "timestamp": "20221022T023310+0300"}},
+    "properties": {
+        "count": 10,
+        "property": [
+            {"name": "enable-unsafe-ssl", "value": "true"},
+            {"name": "externals-mode", "value": "externals-full"},
+            {"name": "labelingMessage", "value": "Labeled automatically by TeamCity"},
+            {"name": "labelingPatterns", "value": "trunk=>tags"},
+            {"name": "secure:svn-password"},
+            {"name": "svn-config-directory", "value": "/root/.subversion"},
+            {"name": "svn-use-default-config-directory", "value": "true"},
+            {"name": "url", "value": "http://svn.com/svn/ws/Teamcity/libs/ASDF"},
+            {"name": "user", "value": "pavel"},
+            {"name": "working-copy-format", "value": "1.8"},
+        ],
+    },
+}
+
 vcs_root_instances = {
     "count": 1,
     "href": "/app/rest/vcs-root-instances?locator=vcsRoot:(id:Abc_Abc)",

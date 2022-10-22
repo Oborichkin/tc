@@ -13,7 +13,7 @@
 - [x] Server
 - [x] Projects
 - [x] vcsRoots
-- [ ] vcsRootInstances
+- [x] vcsRootInstances
 - [ ] builds
 - [ ] users
 - [ ] userGroups

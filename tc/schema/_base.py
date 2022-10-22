@@ -64,3 +64,17 @@ class ProjectSummary(_Base):
     name: str
     description: Optional[str]
     parent_project_id: Optional[str]
+
+
+class _Status(_Base):
+    status: str
+    requestorType: str
+    timestamp: datetime
+
+    @validator("timestamp", pre=True)
+    def iso_date(cls, value):
+        return pendulum.parse(value)
+
+
+class Status(_Base):
+    current: _Status

@@ -1,6 +1,6 @@
 from typing import Optional, List, TYPE_CHECKING
-from pydantic import validator
-from ._base import _Base, Link, Property
+from pydantic import validator, Field
+from ._base import _Base, Link, Property, Status
 from .project import ProjectSummary
 
 
@@ -11,7 +11,7 @@ class VcsRootSummary(_Base):
 
 class VcsRootInstanceSummary(_Base):
     id: str
-    vcs_root_id: str
+    vcs_root_id: str = Field(alias="vcs-root-id")
     name: str
 
 
@@ -36,7 +36,13 @@ class VcsRootInstance(VcsRootInstanceSummary):
     vcs_name: str
     modification_check_interval: int
     last_version: str
-    vcs_root: VcsRoot
+    vcs_root: VcsRootSummary = Field(alias="vcs-root")
+    status: Status
+    properties: List[Property]
+
+    @validator("properties", pre=True)
+    def properties_list(cls, value):
+        return value.get("property", [])
 
 
 class Revision(_Base):

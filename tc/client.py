@@ -1,7 +1,18 @@
 from typing import List, Union
 
 from .api import api
-from .schema import Server, ProjectSummary, Project, BuildSummary, VcsRootSummary, VcsRoot, Build, BuildType
+from .schema import (
+    Server,
+    ProjectSummary,
+    Project,
+    BuildSummary,
+    VcsRootSummary,
+    VcsRoot,
+    Build,
+    BuildType,
+    VcsRootInstance,
+    VcsRootInstanceSummary,
+)
 
 
 class Client:
@@ -30,4 +41,11 @@ class Client:
     def vsc_roots(self, id=None) -> Union[List[VcsRootSummary], VcsRoot]:
         if id:
             return VcsRoot(**self.api.get(f"/app/rest/vcs-roots/id:{id}"))
-        return [vcs for vcs in self.api.get("/app/rest/vcs-roots")["vcs-root"]]
+        return [VcsRootSummary(**vcs) for vcs in self.api.get("/app/rest/vcs-roots")["vcs-root"]]
+
+    def vcs_root_instances(self, id=None) -> Union[List[VcsRootInstanceSummary], VcsRootInstance]:
+        if id:
+            return VcsRootInstance(**self.api.get(f"/app/rest/vcs-root-instances/id:{id}"))
+        return [
+            VcsRootInstanceSummary(**vcs) for vcs in self.api.get("/app/rest/vcs-root-instances")["vcs-root-instance"]
+        ]
