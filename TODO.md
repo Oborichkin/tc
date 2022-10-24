@@ -26,7 +26,7 @@
 - [x] agents
 - [x] agentPools
 - [ ] buildQueue
-- [ ] agentPools
+- [x] agentPools
 - [ ] mutes
 
 ### POST
