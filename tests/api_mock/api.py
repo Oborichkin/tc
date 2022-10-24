@@ -14,6 +14,8 @@ from .responses import (
     build_type,
     agent,
     agents,
+    agent_pools,
+    agent_pool,
 )
 
 
@@ -44,3 +46,7 @@ class ApiMock:
             return agents
         elif url.startswith("/app/rest/agents/id:"):
             return agent
+        elif url == "/app/rest/agentPools":
+            return agent_pools
+        elif url.startswith("/app/rest/agentPools/id:"):
+            return agent_pool

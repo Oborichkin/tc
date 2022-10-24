@@ -24,10 +24,9 @@
 - [ ] users
 - [ ] userGroups
 - [x] agents
-- [ ] agentPools
+- [x] agentPools
 - [ ] buildQueue
 - [ ] agentPools
-- [ ] investigations
 - [ ] mutes
 
 ### POST

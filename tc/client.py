@@ -4,6 +4,8 @@ from .api import api
 from .schema import (
     AgentSummary,
     Agent,
+    AgentPoolSummary,
+    AgentPool,
     Server,
     ProjectSummary,
     Project,
@@ -30,6 +32,11 @@ class Client:
         if id:
             return Agent(**self.api.get(f"/app/rest/agents/id:{id}"))
         return [AgentSummary(**data) for data in self.api.get("/app/rest/agents")["agent"]]
+
+    def agent_pools(self, id=None) -> Union[AgentPool, List[AgentPoolSummary]]:
+        if id:
+            return AgentPool(**self.api.get(f"/app/rest/agentPools/id:{id}"))
+        return [AgentPoolSummary(**data) for data in self.api.get("/app/rest/agentPools")["agentPool"]]
 
     def projects(self, id=None) -> Union[List[ProjectSummary], Project]:
         if id:

@@ -717,3 +717,77 @@ agent = {
     },
     "pool": {"id": 19, "name": "main-pool", "href": "/app/rest/agentPools/id:19"},
 }
+
+agent_pools = {
+    "count": 5,
+    "href": "/app/rest/agentPools?locator=count:5",
+    "nextHref": "/app/rest/agentPools?locator=count:5,start:5",
+    "agentPool": [
+        {"id": 0, "name": "Default", "href": "/app/rest/agentPools/id:0"},
+        {"id": 1, "name": "First", "href": "/app/rest/agentPools/id:1"},
+        {"id": 2, "name": "Second", "href": "/app/rest/agentPools/id:2"},
+        {"id": 3, "name": "Third", "href": "/app/rest/agentPools/id:3"},
+        {"id": 4, "name": "Fourth", "href": "/app/rest/agentPools/id:4"},
+    ],
+}
+
+agent_pool = {
+    "id": 42,
+    "name": "Default",
+    "href": "/app/rest/agentPools/id:0",
+    "projects": {
+        "count": 3,
+        "project": [
+            {
+                "id": "first",
+                "name": "First",
+                "parentProjectId": "_Root",
+                "href": "/app/rest/projects/id:first",
+                "webUrl": "https://teamcity.com/project.html?projectId=first",
+            },
+            {
+                "id": "second",
+                "name": "Second",
+                "parentProjectId": "first",
+                "description": "Second project",
+                "href": "/app/rest/projects/id:second",
+                "webUrl": "https://teamcity.com/project.html?projectId=second",
+            },
+            {
+                "id": "third",
+                "name": "Third",
+                "parentProjectId": "_Root",
+                "description": "Third project",
+                "href": "/app/rest/projects/id:third",
+                "webUrl": "https://teamcity.com/project.html?projectId=third",
+            },
+        ],
+    },
+    "agents": {
+        "count": 3,
+        "href": "/app/rest/agents?locator=pool:(id:0),defaultFilter:false",
+        "agent": [
+            {
+                "id": 1,
+                "name": "first",
+                "typeId": 1,
+                "href": "/app/rest/agents/id:1",
+                "webUrl": "https://teamcity.com/agentDetails.html?id=114087&agentTypeId=1&realAgentName=first",
+            },
+            {
+                "id": 2,
+                "name": "second",
+                "typeId": 2,
+                "href": "/app/rest/agents/id:2",
+                "webUrl": "https://teamcity.com/agentDetails.html?id=2&agentTypeId=2&realAgentName=second",
+            },
+            {
+                "id": 3,
+                "name": "third",
+                "typeId": 3,
+                "href": "/app/rest/agents/id:3",
+                "webUrl": "https://teamcity.com/agentDetails.html?id=114097&agentTypeId=3&realAgentName=third",
+            },
+        ],
+    },
+}

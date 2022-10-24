@@ -59,7 +59,7 @@ class Agent(AgentSummary):
 
 class AgentPool(AgentPoolSummary):
     projects: List["ProjectSummary"]
-    agents: List[AgentSummary]
+    agents: List["AgentSummary"]
 
     @validator("projects", pre=True)
     def project_list(cls, value):

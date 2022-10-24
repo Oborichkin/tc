@@ -18,3 +18,17 @@ def test_agent(client):
     assert agent.authorized_info
     assert agent.properties
     assert agent.pool
+
+
+def test_agent_pools(client):
+    pools = client.agent_pools()
+    assert pools
+    assert len(pools)
+
+
+def test_agent_pool(client):
+    pool = client.agent_pools("test")
+    assert pool.id
+    assert pool.name
+    assert pool.projects
+    assert pool.agents
