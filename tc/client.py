@@ -9,6 +9,7 @@ from .schema import (
     VcsRootSummary,
     VcsRoot,
     Build,
+    BuildTypeSummary,
     BuildType,
     VcsRootInstance,
     VcsRootInstanceSummary,
@@ -33,10 +34,10 @@ class Client:
             return Build(**self.api.get(f"/app/rest/builds/id:{id}"))
         return [BuildSummary(**data) for data in self.api.get("/app/rest/builds")["build"]]
 
-    def build_types(self, id=None) -> List[BuildType]:
+    def build_types(self, id=None) -> Union[List[BuildTypeSummary], BuildType]:
         if id:
             return BuildType(**self.api.get(f"/app/rest/buildTypes/id:{id}"))
-        return [BuildType(**data) for data in self.api.get("/app/rest/buildTypes")["buildType"]]
+        return [BuildTypeSummary(**data) for data in self.api.get("/app/rest/buildTypes")["buildType"]]
 
     def vsc_roots(self, id=None) -> Union[List[VcsRootSummary], VcsRoot]:
         if id:

@@ -1,7 +1,18 @@
 import json
 import requests as r
 
-from .responses import server, projects, project, builds, vcs_root, vcs_root_instances, vcs_roots, vcs_root_instance
+from .responses import (
+    server,
+    projects,
+    project,
+    builds,
+    vcs_root,
+    vcs_root_instances,
+    vcs_roots,
+    vcs_root_instance,
+    build_types,
+    build_type,
+)
 
 
 class ApiMock:
@@ -23,3 +34,7 @@ class ApiMock:
             return vcs_root_instances
         elif url.startswith("/app/rest/vcs-root-instances/id:"):
             return vcs_root_instance
+        elif url == "/app/rest/buildTypes":
+            return build_types
+        elif url.startswith("/app/rest/buildTypes/id:"):
+            return build_type

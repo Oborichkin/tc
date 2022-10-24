@@ -1,7 +1,7 @@
 from .agent import AgentSummary, Agent
 from .agent_pool import AgentPoolSummary, AgentPool
 from .artifact import ArtifactLink
-from .build import BuildSummary, BuildsLink, BuildType, Build, BuildQueue
+from .build import BuildSummary, BuildsLink, BuildTypeSummary, Build, BuildQueue, BuildType
 from .project import ProjectSummary, Project
 from .server import Server
 from .template import Template

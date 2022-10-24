@@ -15,6 +15,11 @@
 - [x] vcsRoots
 - [x] vcsRootInstances
 - [ ] builds
+- [x] build_types
+- [ ] investigation
+  - [ ] scope
+  - [ ] target
+  - [ ] resolution
 - [ ] users
 - [ ] userGroups
 - [ ] agents

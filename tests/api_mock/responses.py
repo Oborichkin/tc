@@ -364,3 +364,274 @@ vcs_root_instances = {
         {"id": "2476", "vcs-root-id": "Abc_Abc", "name": "ABC", "href": "/app/rest/vcs-root-instances/id:2476"}
     ],
 }
+
+
+build_types = {
+    "count": 5,
+    "href": "/app/rest/buildTypes?locator=count:5",
+    "nextHref": "/app/rest/buildTypes?locator=count:5,start:5",
+    "buildType": [
+        {
+            "id": "Abc_Master",
+            "name": "master",
+            "description": "ABC master branch build",
+            "projectName": "ABC",
+            "projectId": "Abc",
+            "href": "/app/rest/buildTypes/id:Abc_Master",
+            "webUrl": "https://teamcity.com/viewType.html?buildTypeId=Abc_Master",
+        },
+        {
+            "id": "Abc_Build",
+            "name": "build",
+            "description": "ABC non-master branch builds",
+            "projectName": "ABC",
+            "projectId": "Abc",
+            "href": "/app/rest/buildTypes/id:Abc_Build",
+            "webUrl": "https://teamcity.com/viewType.html?buildTypeId=Abc_Build",
+        },
+        {
+            "id": "Abc_IssueSomeIssue",
+            "name": "issue/Abc-someIsue",
+            "description": "ABC non-master branch builds",
+            "projectName": "ABC",
+            "projectId": "Abc",
+            "href": "/app/rest/buildTypes/id:Abc_IssueAbc903bfcp",
+            "webUrl": "https://teamcity.com/viewType.html?buildTypeId=Abc_IssueSomeIssue",
+        },
+        {
+            "id": "Abc_Experimental",
+            "name": "Experimental",
+            "description": "ABC non-master branch builds",
+            "projectName": "ABC",
+            "projectId": "Abc",
+            "href": "/app/rest/buildTypes/id:Abc_Experimental",
+            "webUrl": "https://teamcity.com/viewType.html?buildTypeId=Abc_Experimental",
+        },
+        {
+            "id": "Abc_release",
+            "name": "release",
+            "description": "release ABC builds",
+            "projectName": "ABC",
+            "projectId": "Abc",
+            "href": "/app/rest/buildTypes/id:Abc_release",
+            "webUrl": "https://teamcity.com/viewType.html?buildTypeId=Abc_release",
+        },
+    ],
+}
+
+
+build_type = {
+    "id": "Abc",
+    "name": "ABC",
+    "description": "ABC non-master branch builds",
+    "projectName": "ABC",
+    "projectId": "Abc",
+    "href": "/app/rest/buildTypes/id:Abc",
+    "webUrl": "https://teamcity.com/viewType.html?buildTypeId=Abc",
+    "project": {
+        "id": "Abc",
+        "name": "ABC",
+        "parentProjectId": "_Root",
+        "description": "Simple as ABC",
+        "href": "/app/rest/projects/id:Abc",
+        "webUrl": "https://teamcity.com/project.html?projectId=Abc",
+    },
+    "builds": {"href": "/app/rest/buildTypes/id:Abc/builds/"},
+    "investigations": {"href": "/app/rest/investigations?locator=buildType:(id:Abc)"},
+    "compatibleAgents": {"href": "/app/rest/agents?locator=compatible:(buildType:(id:Abc))"},
+}
+
+investigation = {
+    "id": "test:(id:-8676170902480411651),assignmentProject:(id:Abc_Tests)",
+    "state": "TAKEN",
+    "href": "/app/rest/investigations/test:(id:-8676170902480411651),assignmentProject:(id:Abc_Tests)",
+    "assignee": {"username": "jobs", "name": "Steve Jobs", "id": 68, "href": "/app/rest/users/id:68"},
+    "assignment": {
+        "timestamp": "20210331T154612+0300",
+        "text": "Some text here",
+        "user": {"username": "carmack", "name": "John Carmack", "id": 85, "href": "/app/rest/users/id:85"},
+    },
+    "scope": {
+        "project": {
+            "id": "Abc_Tests",
+            "name": "Tests",
+            "parentProjectId": "Abc",
+            "description": "ABC Tests",
+            "href": "/app/rest/projects/id:Abc_Tests",
+            "webUrl": "https://teamcity.com/project.html?projectId=Abc_Tests",
+        }
+    },
+    "target": {
+        "tests": {
+            "count": 1,
+            "test": [
+                {
+                    "id": "-8676170902480411651",
+                    "name": "Some test name",
+                    "href": "/app/rest/tests/id:-8676170902480411651",
+                }
+            ],
+        }
+    },
+    "resolution": {"type": "manually"},
+}
+
+investigations = {
+    "count": 5,
+    "nextHref": "/app/rest/investigations?locator=count:5,start:5",
+    "href": "/app/rest/investigations?locator=count:5",
+    "investigation": [
+        {
+            "id": "buildType:(id:MMM_DevelopGit)",
+            "state": "GIVEN_UP",
+            "href": "/app/rest/investigations/buildType:(id:MMM_DevelopGit)",
+            "assignee": {"username": "gates", "name": "Bill Gates", "id": 5, "href": "/app/rest/users/id:5"},
+            "assignment": {
+                "timestamp": "20221024T161045+0300",
+                "user": {"username": "gates", "name": "Bill Gates", "id": 5, "href": "/app/rest/users/id:5"},
+            },
+            "scope": {
+                "buildTypes": {
+                    "count": 1,
+                    "buildType": [
+                        {
+                            "id": "MMM_DevelopGit",
+                            "name": "develop-git",
+                            "description": "MMM GIT",
+                            "projectName": "MMM",
+                            "projectId": "MMM",
+                            "href": "/app/rest/buildTypes/id:MMM_DevelopGit",
+                            "webUrl": "https://teamcity.com/viewType.html?buildTypeId=MMM_DevelopGit",
+                        }
+                    ],
+                }
+            },
+            "target": {"anyProblem": True},
+            "resolution": {"type": "whenFixed"},
+        },
+        {
+            "id": "buildType:(id:MMM_CentOS6x8664)",
+            "state": "GIVEN_UP",
+            "href": "/app/rest/investigations/buildType:(id:MMM_CentOS6x8664)",
+            "assignee": {"username": "gates", "name": "Bill Gates", "id": 5, "href": "/app/rest/users/id:5"},
+            "assignment": {
+                "timestamp": "20200821T083429+0300",
+                "user": {"username": "gates", "name": "Bill Gates", "id": 5, "href": "/app/rest/users/id:5"},
+            },
+            "scope": {
+                "buildTypes": {
+                    "count": 1,
+                    "buildType": [
+                        {
+                            "id": "MMM_CentOS6x8664",
+                            "name": "CentOS6_x86-64",
+                            "description": "MMM branch 'R7'",
+                            "projectName": "MMM / R7",
+                            "projectId": "MMM_R7",
+                            "href": "/app/rest/buildTypes/id:MMM_CentOS6x8664",
+                            "webUrl": "https://teamcity.com/viewType.html?buildTypeId=MMM_CentOS6x8664",
+                        }
+                    ],
+                }
+            },
+            "target": {"anyProblem": True},
+            "resolution": {"type": "whenFixed"},
+        },
+        {
+            "id": "buildType:(id:MMM_NNN_Master)",
+            "state": "TAKEN",
+            "href": "/app/rest/investigations/buildType:(id:MMM_NNN_Master)",
+            "assignee": {"username": "gates", "name": "Bill Gates", "id": 5, "href": "/app/rest/users/id:5"},
+            "assignment": {
+                "timestamp": "20211029T194344+0300",
+                "user": {"username": "gates", "name": "Bill Gates", "id": 5, "href": "/app/rest/users/id:5"},
+            },
+            "scope": {
+                "buildTypes": {
+                    "count": 1,
+                    "buildType": [
+                        {
+                            "id": "MMM_NNN_Master",
+                            "name": "master",
+                            "description": "Build NNN for MMM",
+                            "projectName": "MMM / NNN",
+                            "projectId": "MMM_NNN",
+                            "href": "/app/rest/buildTypes/id:MMM_NNN_Master",
+                            "webUrl": "https://teamcity.com/viewType.html?buildTypeId=MMM_NNN_Master",
+                        }
+                    ],
+                }
+            },
+            "target": {"anyProblem": True},
+            "resolution": {"type": "whenFixed"},
+        },
+        {
+            "id": "test:(id:-8676170902480411651),assignmentProject:(id:Abc_Tests)",
+            "state": "TAKEN",
+            "href": "/app/rest/investigations/test:(id:-8676170902480411651),assignmentProject:(id:Abc_Tests)",
+            "assignee": {"username": "jobs", "name": "Steve Jobs", "id": 68, "href": "/app/rest/users/id:68"},
+            "assignment": {
+                "timestamp": "20210331T154612+0300",
+                "text": "Some text here",
+                "user": {"username": "carmack", "name": "John Carmack", "id": 85, "href": "/app/rest/users/id:85"},
+            },
+            "scope": {
+                "project": {
+                    "id": "Abc_Tests",
+                    "name": "Tests",
+                    "parentProjectId": "Abc",
+                    "description": "ABC Tests",
+                    "href": "/app/rest/projects/id:Abc_Tests",
+                    "webUrl": "https://teamcity.com/project.html?projectId=Abc_Tests",
+                }
+            },
+            "target": {
+                "tests": {
+                    "count": 1,
+                    "test": [
+                        {
+                            "id": "-8676170902480411651",
+                            "name": "Test Name",
+                            "href": "/app/rest/tests/id:-8676170902480411651",
+                        }
+                    ],
+                }
+            },
+            "resolution": {"type": "manually"},
+        },
+        {
+            "id": "test:(id:-1850744997341218790),assignmentProject:(id:Abc_Tests)",
+            "state": "TAKEN",
+            "href": "/app/rest/investigations/test:(id:-1850744997341218790),assignmentProject:(id:Abc_Tests)",
+            "assignee": {"username": "jobs", "name": "Steve Jobs", "id": 68, "href": "/app/rest/users/id:68"},
+            "assignment": {
+                "timestamp": "20210702T142212+0300",
+                "text": "Some another text",
+                "user": {"username": "jobs", "name": "Steve Jobs", "id": 68, "href": "/app/rest/users/id:68"},
+            },
+            "scope": {
+                "project": {
+                    "id": "Abc_Tests",
+                    "name": "Tests",
+                    "parentProjectId": "Abc",
+                    "description": "ABC Tests",
+                    "href": "/app/rest/projects/id:Abc_Tests",
+                    "webUrl": "https://teamcity.com/project.html?projectId=Abc_Tests",
+                }
+            },
+            "target": {
+                "tests": {
+                    "count": 1,
+                    "test": [
+                        {
+                            "id": "-1850744997341218790",
+                            "name": "Some test name",
+                            "href": "/app/rest/tests/id:-1850744997341218790",
+                        }
+                    ],
+                }
+            },
+            "resolution": {"type": "manually"},
+        },
+    ],
+}

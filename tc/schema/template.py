@@ -1,9 +1,9 @@
 from pydantic import validator
 
-from .build import BuildType
+from .build import BuildTypeSummary
 
 
-class Template(BuildType):
+class Template(BuildTypeSummary):
     template_flag: bool
 
     @validator("template_flag", pre=True)

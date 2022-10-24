@@ -1,13 +1,13 @@
 from pydantic import validator
 from typing import Optional, List
 from ._base import _Base, Property, ProjectSummary
-from .build import BuildType
+from .build import BuildTypeSummary
 from .template import Template
 
 
 class Project(ProjectSummary):
     parent_project: Optional[ProjectSummary]
-    build_types: Optional[List[BuildType]]
+    build_types: Optional[List[BuildTypeSummary]]
     templates: Optional[List[Template]]
     parameters: Optional[List[Property]]
     projects: List[ProjectSummary]
