@@ -2,6 +2,8 @@ from typing import List, Union
 
 from .api import api
 from .schema import (
+    AgentSummary,
+    Agent,
     Server,
     ProjectSummary,
     Project,
@@ -23,6 +25,11 @@ class Client:
 
     def server(self) -> Server:
         return Server(**self.api.get("/app/rest/server"))
+
+    def agents(self, id=None) -> Union[Agent, List[AgentSummary]]:
+        if id:
+            return Agent(**self.api.get(f"/app/rest/agents/id:{id}"))
+        return [AgentSummary(**data) for data in self.api.get("/app/rest/agents")["agent"]]
 
     def projects(self, id=None) -> Union[List[ProjectSummary], Project]:
         if id:

@@ -12,6 +12,8 @@ from .responses import (
     vcs_root_instance,
     build_types,
     build_type,
+    agent,
+    agents,
 )
 
 
@@ -38,3 +40,7 @@ class ApiMock:
             return build_types
         elif url.startswith("/app/rest/buildTypes/id:"):
             return build_type
+        elif url == "/app/rest/agents":
+            return agents
+        elif url.startswith("/app/rest/agents/id:"):
+            return agent

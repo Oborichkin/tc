@@ -200,12 +200,12 @@ vcs_root = {
             {"name": "agentCleanPolicy", "value": "ON_BRANCH_CHANGE"},
             {"name": "authMethod", "value": "TEAMCITY_SSH_KEY"},
             {"name": "branch", "value": "master"},
-            {"name": "ignoreKnownHosts", "value": "true"},
+            {"name": "ignoreKnownHosts", "value": "True"},
             {"name": "submoduleCheckout", "value": "CHECKOUT"},
             {"name": "teamcity:branchSpec", "value": "+:refs/heads/*"},
             {"name": "teamcitySshKey", "value": "GitLab Public Deploy Key"},
             {"name": "url", "value": "git@github.com:ABC/ABC.git"},
-            {"name": "useAlternates", "value": "true"},
+            {"name": "useAlternates", "value": "True"},
             {"name": "usernameStyle", "value": "USERID"},
         ],
     },
@@ -343,13 +343,13 @@ vcs_root_instance = {
     "properties": {
         "count": 10,
         "property": [
-            {"name": "enable-unsafe-ssl", "value": "true"},
+            {"name": "enable-unsafe-ssl", "value": "True"},
             {"name": "externals-mode", "value": "externals-full"},
             {"name": "labelingMessage", "value": "Labeled automatically by TeamCity"},
             {"name": "labelingPatterns", "value": "trunk=>tags"},
             {"name": "secure:svn-password"},
             {"name": "svn-config-directory", "value": "/root/.subversion"},
-            {"name": "svn-use-default-config-directory", "value": "true"},
+            {"name": "svn-use-default-config-directory", "value": "True"},
             {"name": "url", "value": "http://svn.com/svn/ws/Teamcity/libs/ASDF"},
             {"name": "user", "value": "pavel"},
             {"name": "working-copy-format", "value": "1.8"},
@@ -634,4 +634,86 @@ investigations = {
             "resolution": {"type": "manually"},
         },
     ],
+}
+
+agents = {
+    "count": 5,
+    "nextHref": "/app/rest/agents?locator=count:5,start:5",
+    "href": "/app/rest/agents?locator=count:5",
+    "agent": [
+        {
+            "id": 1,
+            "name": "first_agent",
+            "typeId": 42,
+            "href": "/app/rest/agents/id:1",
+            "webUrl": "https://teamcity.com/agentDetails.html?id=5606&agentTypeId=42&realAgentName=first_agent",
+        },
+        {
+            "id": 2,
+            "name": "second_agent",
+            "typeId": 43,
+            "href": "/app/rest/agents/id:2",
+            "webUrl": "https://teamcity.com/agentDetails.html?id=6089&agentTypeId=43&realAgentName=second_agent",
+        },
+        {
+            "id": 3,
+            "name": "third_agent",
+            "typeId": 62,
+            "href": "/app/rest/agents/id:3",
+            "webUrl": "https://teamcity.com/agentDetails.html?id=9835&agentTypeId=62&realAgentName=third_agent",
+        },
+        {
+            "id": 4,
+            "name": "fourth_agent",
+            "typeId": 67,
+            "href": "/app/rest/agents/id:4",
+            "webUrl": "https://teamcity.com/agentDetails.html?id=10798&agentTypeId=67&realAgentName=fourth_agent",
+        },
+        {
+            "id": 5,
+            "name": "fifth_agent",
+            "typeId": 260,
+            "href": "/app/rest/agents/id:5",
+            "webUrl": "https://teamcity.com/agentDetails.html?id=52112&agentTypeId=260&realAgentName=fifth_agent",
+        },
+    ],
+}
+
+agent = {
+    "id": 5606,
+    "name": "first_agent",
+    "typeId": 42,
+    "connected": True,
+    "enabled": True,
+    "authorized": True,
+    "uptodate": True,
+    "ip": "127.0.0.1",
+    "href": "/app/rest/agents/id:5606",
+    "webUrl": "https://teamcity.com/agentDetails.html?id=5606&agentTypeId=42&realAgentName=first_agent",
+    "enabledInfo": {
+        "status": True,
+        "comment": {
+            "timestamp": "20211208T144642+0300",
+            "text": "some text",
+            "user": {"username": "stallman", "name": "Richard Stallman", "id": 158, "href": "/app/rest/users/id:158"},
+        },
+    },
+    "authorizedInfo": {
+        "status": True,
+        "comment": {
+            "timestamp": "20190719T190434+0300",
+            "text": "Some other text",
+            "user": {"username": "linus", "name": "Linus Torvalds", "id": 16, "href": "/app/rest/users/id:16"},
+        },
+    },
+    "properties": {
+        "count": 81,
+        "property": [
+            {"name": "docker.server.osType", "value": "linux"},
+            {"name": "docker.server.version", "value": "18.03.1"},
+            {"name": "docker.version", "value": "18.06.1"},
+            {"name": "dockerCompose.version", "value": "1.23.2"},
+        ],
+    },
+    "pool": {"id": 19, "name": "main-pool", "href": "/app/rest/agentPools/id:19"},
 }

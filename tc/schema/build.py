@@ -4,11 +4,12 @@ from pydantic import validator, BaseModel
 from typing import Optional, List, TYPE_CHECKING
 from ._base import _Base, Link, Dependency, Property, Change
 
-from .agent import Agent, AgentLink
-from .vcs import Revision
-from .artifact import ArtifactLink
-from .project import ProjectSummary
-from .user import UserSummary
+if TYPE_CHECKING:
+    from .agent import Agent, AgentLink
+    from .vcs import Revision
+    from .artifact import ArtifactLink
+    from .project import ProjectSummary
+    from .user import UserSummary
 
 
 class BuildSummary(_Base):
@@ -27,7 +28,7 @@ class BuildSummary(_Base):
 class Assignment(BaseModel):
     timestamp: datetime
     text: Optional[str]
-    user: UserSummary
+    user: "UserSummary"
 
     @validator("timestamp", pre=True)
     def iso_date(cls, value):
@@ -37,7 +38,7 @@ class Assignment(BaseModel):
 class Investigation(_Base):
     id: str
     state: str
-    assignee: UserSummary
+    assignee: "UserSummary"
     # scope
     # target
     # resolution
@@ -66,10 +67,10 @@ class BuildTypeSummary(_Base):
 
 
 class BuildType(BuildTypeSummary):
-    project: ProjectSummary
-    builds: BuildsLink
-    investigations: InvestigationsLink
-    compatible_agents: AgentLink
+    project: "ProjectSummary"
+    builds: "BuildsLink"
+    investigations: "InvestigationsLink"
+    compatible_agents: "AgentLink"
 
 
 class Build(BuildSummary):
@@ -79,11 +80,11 @@ class Build(BuildSummary):
     start_date: datetime
     finish_date: datetime
     last_changes: Optional[List[Change]]
-    revisions: Optional[List[Revision]]
-    versioned_settings_revision: Optional[Revision]
-    agent: Agent
+    revisions: Optional[List["Revision"]]
+    versioned_settings_revision: Optional["Revision"]
+    agent: "Agent"
     # test_occurances
-    artifacts: ArtifactLink
+    artifacts: "ArtifactLink"
     # relatedIssues
     properties: List[Property]
     # statistics

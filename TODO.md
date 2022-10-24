@@ -7,6 +7,7 @@
 ### General
 
 - [ ] Pagination
+- [ ] Locator usage
 
 ### GET
 
@@ -22,7 +23,8 @@
   - [ ] resolution
 - [ ] users
 - [ ] userGroups
-- [ ] agents
+- [x] agents
+- [ ] agentPools
 - [ ] buildQueue
 - [ ] agentPools
 - [ ] investigations
